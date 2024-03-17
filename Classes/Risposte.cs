@@ -11,12 +11,13 @@ namespace flashcard_colloquio.Classes
 
     public class Risposte
     {
-        public string? OttieniRisposta(int idDomanda)
+        public string? OttieniRisposta(int idDomanda, string categoria)
         {
             string? nomeFile = $"{idDomanda}.md";
+            string? percorsoCartellaCategoria = Path.Combine("Risposte", categoria);
             try
             {
-                string? percorsoFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Risposte", nomeFile);
+                string? percorsoFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, percorsoCartellaCategoria, nomeFile);
                 if (File.Exists(percorsoFile))
                 {
                     return File.ReadAllText(percorsoFile);
@@ -31,6 +32,7 @@ namespace flashcard_colloquio.Classes
                 return $"\nErrore durante la lettura del file: {ex.Message}";
             }
         }
+
     }
 
 }
